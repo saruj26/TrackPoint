@@ -8,8 +8,10 @@ import {
   TextInput,
   Alert,
   ScrollView,
+  Image,
 } from "react-native";
 import { useRouter } from "expo-router";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function MenuScreen() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
@@ -34,11 +36,33 @@ export default function MenuScreen() {
   };
 
   const router = useRouter();
+  const insets = useSafeAreaInsets();
+  // Mock delivered items count for header display
+  const delivered: any[] = [];
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      
+       {/* Enhanced TrackPoint Header */}
+            <View style={[styles.header, { paddingTop: insets.top }]}>
+              <View style={styles.headerBackground} />
+              <View style={styles.headerContent}>
+                <View style={styles.logoContainer}>
+                  <Image
+                    source={{
+                      uri: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
+                    }}
+                    style={styles.logo}
+                    resizeMode="contain"
+                  />
+                  <View style={styles.titleContainer}>
+                    <Text style={styles.headerTitle}>TrackPoint</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+      
       <Text style={styles.heading}>Menu</Text>
-
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Notifications</Text>
         <View style={styles.switchRow}>
@@ -83,19 +107,19 @@ export default function MenuScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
     backgroundColor: "#f8f9fa",
     flexGrow: 1,
   },
   heading: {
     fontSize: 22,
+    paddingHorizontal: 16,
     fontWeight: "700",
     marginBottom: 16,
     color: "#333",
   },
   section: {
     backgroundColor: "#fff",
-    padding: 16,
+    padding: 20,
     borderRadius: 10,
     marginBottom: 12,
     borderWidth: 1,
@@ -139,5 +163,68 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontWeight: "700",
+  },
+
+  /* Header / Logo styles */
+  header: {
+    marginBottom: 16,
+    borderRadius: 10,
+    overflow: "hidden",
+    backgroundColor: "transparent",
+  },
+  headerBackground: {
+    height: 110,
+    backgroundColor: "#007AFF",
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+  },
+  headerContent: {
+    paddingHorizontal: 16,
+    paddingBottom: 12,
+    paddingTop: 12,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  logoContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  logo: {
+    width: 48,
+    height: 48,
+    borderRadius: 8,
+    backgroundColor: "rgba(255,255,255,0.15)",
+  },
+  titleContainer: {
+    marginLeft: 12,
+  },
+  headerTitle: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "700",
+  },
+  headerSubtitle: {
+    color: "rgba(255,255,255,0.9)",
+    fontSize: 12,
+  },
+  statsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  statItem: {
+    alignItems: "center",
+    marginLeft: 12,
+  },
+  statNumber: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "700",
+  },
+  statLabel: {
+    color: "rgba(255,255,255,0.9)",
+    fontSize: 12,
   },
 });

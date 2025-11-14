@@ -39,6 +39,9 @@ function HeaderMenuButton() {
 }
 
 export default function TabLayout() {
+  const insets = useSafeAreaInsets();
+  const bottomPadding = Math.max(insets.bottom, 8);
+
   return (
     <Tabs
       screenOptions={{
@@ -48,8 +51,8 @@ export default function TabLayout() {
         headerStyle: { backgroundColor: "#007AFF" },
         headerTintColor: "#fff",
         tabBarStyle: {
-          height: 56,
-          paddingBottom: 8,
+          height: 50 + insets.bottom,
+          paddingBottom: bottomPadding,
           paddingTop: 6,
         },
       }}
@@ -105,7 +108,7 @@ export default function TabLayout() {
         name="menu"
         options={{
           title: "Menu",
-
+          headerShown: false,
           headerTintColor: "#fff",
           tabBarIcon: ({ color, size }) => (
             // Force menu icon to blue

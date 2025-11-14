@@ -351,6 +351,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     marginLeft: 12,
+    marginTop: 19,
   },
   headerTitle: {
     color: "#fff",
