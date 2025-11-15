@@ -31,6 +31,7 @@ type Customer = {
   _id: string;
   name: string;
   address: string;
+  phone?: string;
   latitude: number | null;
   longitude: number | null;
   orderDetails?: string;
@@ -1156,6 +1157,11 @@ export default function HomeScreen() {
                   <Text style={styles.featuredCustomerAddress}>
                     {nearestCustomer.address}
                   </Text>
+                  {nearestCustomer.phone ? (
+                    <Text style={styles.featuredCustomerPhone}>
+                      📞 {nearestCustomer.phone}
+                    </Text>
+                  ) : null}
                 </View>
                 <View style={styles.distanceBadge}>
                   <Text style={styles.distanceBadgeText}>
@@ -1314,20 +1320,41 @@ export default function HomeScreen() {
                         {customer.address}
                       </Text>
 
-                      {(customer.orderDetails || customer.deliveryPerson) && (
+                      {(customer.orderDetails ||
+                        customer.deliveryPerson ||
+                        customer.phone) && (
                         <View style={styles.customerMeta}>
-                          {customer.orderDetails && (
-                            <View style={styles.metaItem}>
-                              <Ionicons
-                                name="cube-outline"
-                                size={12}
-                                color="#6b7280"
-                              />
-                              <Text style={styles.metaText}>
-                                {customer.orderDetails}
-                              </Text>
+                          {(customer.orderDetails || customer.phone) && (
+                            <View style={styles.metaRow}>
+                              {customer.orderDetails ? (
+                                <View style={styles.metaItem}>
+                                  <Ionicons
+                                    name="cube-outline"
+                                    size={12}
+                                    color="#6b7280"
+                                  />
+                                  <Text
+                                    style={styles.metaText}
+                                    numberOfLines={1}
+                                  >
+                                    {customer.orderDetails}
+                                  </Text>
+                                </View>
+                              ) : (
+                                <View style={{ flex: 1 }} />
+                              )}
+
+                              {customer.phone ? (
+                                <Text
+                                  style={styles.metaPhone}
+                                  numberOfLines={1}
+                                >
+                                  📞 {customer.phone}
+                                </Text>
+                              ) : null}
                             </View>
                           )}
+
                           {customer.deliveryPerson && (
                             <View style={styles.metaItem}>
                               <Ionicons
@@ -1885,6 +1912,12 @@ const styles = StyleSheet.create({
     color: "#6b7280",
     lineHeight: 18,
   },
+  featuredCustomerPhone: {
+    fontSize: 13,
+    color: "#374151",
+    marginTop: 6,
+    fontWeight: "600",
+  },
   distanceBadge: {
     backgroundColor: "#1f2937",
     paddingHorizontal: 10,
@@ -1961,7 +1994,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#f9fafb",
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 8,
     borderRadius: 12,
     marginBottom: 16,
     borderWidth: 1,
@@ -1973,6 +2006,7 @@ const styles = StyleSheet.create({
     color: "#374151",
     marginLeft: 12,
     marginRight: 8,
+    paddingVertical: 6,
   },
   clearSearchButton: {
     padding: 4,
@@ -2018,6 +2052,23 @@ const styles = StyleSheet.create({
     color: "#6b7280",
     marginBottom: 8,
     lineHeight: 18,
+  },
+  customerPhone: {
+    fontSize: 13,
+    color: "#374151",
+    marginBottom: 8,
+  },
+  metaRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  metaPhone: {
+    fontSize: 13,
+    color: "#374151",
+    marginLeft: 12,
+    maxWidth: "45%",
+    textAlign: "right",
   },
   customerMeta: {
     marginBottom: 8,
@@ -2247,7 +2298,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 12,
     right: 12,
-    bottom:2,
+    bottom: 2,
     zIndex: 1100,
     backgroundColor: "transparent",
   },

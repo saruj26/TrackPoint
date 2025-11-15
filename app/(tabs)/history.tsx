@@ -101,30 +101,9 @@ export default function HistoryScreen() {
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#007AFF" />
 
-      {/* Enhanced TrackPoint Header */}
-      <View style={[styles.header, { paddingTop: insets.top }]}>
-        <View style={styles.headerBackground} />
-        <View style={styles.headerContent}>
-          <View style={styles.logoContainer}>
-            <Image
-              source={{
-                uri: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
-              }}
-              style={styles.logo}
-              resizeMode="contain"
-            />
-            <View style={styles.titleContainer}>
-              <Text style={styles.headerTitle}>TrackPoint</Text>
-              <Text style={styles.headerSubtitle}>Delivery History</Text>
-            </View>
-          </View>
-          <View style={styles.statsContainer}>
-            <View style={styles.statItem}>
-              <Text style={styles.statNumber}>{delivered.length}</Text>
-              <Text style={styles.statLabel}>Delivered</Text>
-            </View>
-          </View>
-        </View>
+      {/* Inline page header (title) */}
+      <View style={styles.pageHeader}>
+        <Text style={styles.pageTitle}>Delivered History</Text>
       </View>
 
       {/* Main Content */}
@@ -399,7 +378,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 12,
     paddingHorizontal: 14,
-    paddingVertical: 8,
+    paddingVertical: 6,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
@@ -553,5 +532,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  pageHeader: {
+    marginBottom: 2,
+    paddingHorizontal: 16,
+    paddingTop: 12,
+  },
+  pageTitle: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#333",
+    textAlign: "center",
   },
 });

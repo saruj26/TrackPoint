@@ -42,26 +42,8 @@ export default function MenuScreen() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      
-       {/* Enhanced TrackPoint Header */}
-            <View style={[styles.header, { paddingTop: insets.top }]}>
-              <View style={styles.headerBackground} />
-              <View style={styles.headerContent}>
-                <View style={styles.logoContainer}>
-                  <Image
-                    source={{
-                      uri: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
-                    }}
-                    style={styles.logo}
-                    resizeMode="contain"
-                  />
-                  <View style={styles.titleContainer}>
-                    <Text style={styles.headerTitle}>TrackPoint</Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-      
+      {/* Page header handled by layout; page content begins below */}
+
       <Text style={styles.heading}>Menu</Text>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Notifications</Text>
@@ -113,6 +95,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 22,
     paddingHorizontal: 16,
+    paddingVertical:12,
     fontWeight: "700",
     marginBottom: 16,
     color: "#333",
@@ -193,8 +176,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    width: 48,
-    height: 48,
+    width: 36,
+    height: 36,
     borderRadius: 8,
     backgroundColor: "rgba(255,255,255,0.15)",
   },

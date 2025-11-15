@@ -24,6 +24,7 @@ function CenterTabButton({ onPress }: any) {
     </TouchableOpacity>
   );
 }
+
 function HeaderMenuButton() {
   const router = useRouter();
 
@@ -46,7 +47,22 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: "#007AFF",
+        // Show the same header (logo + app name + menu) on all tabs
         headerShown: true,
+        headerTitle: () => (
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Image
+              source={{
+                uri: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
+              }}
+              style={{ width: 24, height: 24, marginRight: 8 }}
+            />
+            <Text style={{ fontSize: 18, fontWeight: "700", color: "#fff" }}>
+              TrackPoint
+            </Text>
+          </View>
+        ),
+        headerRight: () => <HeaderMenuButton />,
         tabBarShowLabel: true,
         headerStyle: { backgroundColor: "#007AFF" },
         headerTintColor: "#fff",
@@ -60,6 +76,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
+          headerShown: true,
           headerTitle: () => (
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
@@ -97,7 +114,6 @@ export default function TabLayout() {
         name="history"
         options={{
           title: "History",
-          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="time" size={size} color={color} />
           ),
@@ -108,7 +124,6 @@ export default function TabLayout() {
         name="menu"
         options={{
           title: "Menu",
-          headerShown: false,
           headerTintColor: "#fff",
           tabBarIcon: ({ color, size }) => (
             // Force menu icon to blue
